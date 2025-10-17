@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +10,13 @@ namespace ConsoleApplication5
     {
         static void Main(string[] args)
         {
-            Double a,d;
+            Double a, f;
             Console.Write("Enter a temp : ");
-            a = Double.Parse(Console.ReadLine());
-            d = a * 1.8 + 32;
-            Console.WriteLine(d);
+            a = Convert.ToDouble(Console.ReadLine());
+            f = (a * 9 / 5) + 32;
+            Console.WriteLine("Temperature in Fahrenheit: " + f);
             Console.ReadKey();
         }
     }
 }
+
