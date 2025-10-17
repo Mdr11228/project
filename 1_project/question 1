@@ -1,17 +1,19 @@
-﻿using System;
+
+using System;
 
 class Program
 {
     static void Main()
     {
+        double r, c, a;
         Console.Write("Enter the radius: ");
-        double radius = Convert.ToDouble(Console.ReadLine());
+        r = Convert.ToDouble(Console.ReadLine());
 
-        double circumference = 2 * Math.PI * radius;
-        double area = Math.PI * Math.Pow(radius, 2);
+        c = 2 * Math.PI * r;
+        a = Math.PI * Math.Pow(r, 2);
 
-        Console.WriteLine("masahat: " + circumference);
-        Console.WriteLine("mohit: " + area);
+        Console.WriteLine("mohit: " + c);
+        Console.WriteLine("masahat: " + a);
         Console.ReadKey();
     }
 }
