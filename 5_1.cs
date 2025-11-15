@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static double Mohit(double a, double b, double c)
+        {
+            return a + b + c;
+        }
+
+        static double Masahat(double a, double b, double c)
+        {
+            double s = (a + b + c) / 2;  
+            double area = Math.Sqrt(s * (s - a) * (s - b) * (s - c));
+            return area;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.Write("Number 1: ");
+            double a = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Number 2: ");
+            double b = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Number 3: ");
+            double c = Convert.ToDouble(Console.ReadLine());
+
+            double mohit = Mohit(a, b, c);
+            double masahat = Masahat(a, b, c);
+
+            Console.WriteLine("\n mohit and masahat");
+            Console.WriteLine("Mohit = " + mohit);
+            Console.WriteLine("Masahat = " + masahat);
+
+            Console.ReadKey(); 
+        }
+    }
+}
