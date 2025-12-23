@@ -1,0 +1,130 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace UNI
+{
+    class Student
+    {
+        public string Name;
+        public string Family;
+
+        public Student(string n, string f)
+        {
+            Name = n;
+            Family = f;
+        }
+    }
+
+    class Program
+    {
+        static Dictionary<int, Student> students = new Dictionary<int, Student>();
+        static string path = @"C:\UNI\UNI.txt";
+
+        static void Main(string[] args)
+        {
+            if (!Directory.Exists(@"C:\UNI"))
+            {
+                Directory.CreateDirectory(@"C:\UNI");
+            }
+
+            LoadFromFile();
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("1- Add Student");
+                Console.WriteLine("2- Show Students");
+                Console.WriteLine("3- Delete Student");
+                Console.WriteLine("4- Exit");
+                Console.Write("Select: ");
+
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        AddStudent();
+                        break;
+                    case 2:
+                        ShowStudents();
+                        break;
+                    case 3:
+                        DeleteStudent();
+                        break;
+                    case 4:
+                        SaveToFile();
+                        return;
+                }
+            }
+        }
+
+        static void AddStudent()
+        {
+            Console.Write("Student ID: ");
+            int id = int.Parse(Console.ReadLine());
+
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Family: ");
+            string family = Console.ReadLine();
+
+            students[id] = new Student(name, family);
+
+            Console.WriteLine("Saved successfully");
+            Console.ReadKey();
+        }
+
+        static void ShowStudents()
+        {
+            Console.Clear();
+            foreach (var s in students)
+            {
+                Console.WriteLine(s.Key + " : " + s.Value.Name + " " + s.Value.Family);
+            }
+            Console.ReadKey();
+        }
+
+        static void DeleteStudent()
+        {
+            Console.Write("Enter ID to delete: ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (students.ContainsKey(id))
+            {
+                students.Remove(id);
+                Console.WriteLine("Deleted");
+            }
+            else
+            {
+                Console.WriteLine("Not found");
+            }
+            Console.ReadKey();
+        }
+
+        static void SaveToFile()
+        {
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach (var s in students)
+                {
+                    sw.WriteLine(s.Key + "," + s.Value.Name + "," + s.Value.Family);
+                }
+            }
+        }
+
+        static void LoadFromFile()
+        {
+            if (!File.Exists(path)) return;
+
+            string[] lines = File.ReadAllLines(path);
+            foreach (string line in lines)
+            {
+                string[] p = line.Split(',');
+                int id = int.Parse(p[0]);
+                students[id] = new Student(p[1], p[2]);
+            }
+        }
+    }
+}
